@@ -4,6 +4,7 @@
     <input type="email" id="email" required v-model="email">
     <label for="password">パスワード:</label>
     <input type="password" id="password" required v-model="password">
+    <div v-if="passwordError" class="error">{{passwordError}}</div>
     <label for="">キャリア</label>
     <select v-model="career">
         <option value="developer">開発者</option>
@@ -61,8 +62,16 @@ export default {
              });
         },
         handleSubmit(){
-            console.log('submitted')
-            this.passwordError = this.password.length > 5 ? '' : 'パスワードは五つの以上です。'
+            this.passwordError = this.password.length > 5 ?
+             '' : 'パスワードは五つの以上です。'
+            if(!this.passwordError){
+                console.log('email',this.email)
+                console.log('password',this.password)
+                console.log('career',this.career)
+                console.log('agreement',this.agreement)
+                console.log('tempSkill',this.tempSkill)
+                console.table(this.skills)
+            }
         }
     }
 }
@@ -125,5 +134,11 @@ button{
 }
 .submit{
     text-align: center;
+}
+.error{
+    color: #e81e1e;
+    margin-top: 10px;
+    font-size: 0.6rem;
+    font-weight: bolder;
 }
 </style>
